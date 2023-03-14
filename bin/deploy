@@ -1,0 +1,6 @@
+kubectl apply -f jenkins-namespace.yaml
+kubectl apply -f jenkins-volume.yaml -n jenkins
+kubectl apply -f jenkins-controller.yaml -n jenkins
+kubectl apply -f jenkins-service.yaml -n jenkins
+kubectl apply -f jenkins-agents.yaml -n jenkins
+

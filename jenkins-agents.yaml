@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-agents
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-agents
+  template:
+    metadata:
+      labels:
+        app: jenkins-agents
+    spec:
+      containers:
+      - name: linux-agent
+        image: jenkins/inbound-agent:4.10-3-jdk11
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: JENKINS_URL
+          value: "http://jenkins.jenkins.svc.cluster.local:8080"
+        - name: JENKINS_SECRET
+          value: "f536775bd80bec86312d0cbc720a1eb283d7cf794ec203bf58a9dc05c94b476a"
+        - name: JENKINS_AGENT_NAME
+          value: "linux"
+        - name: JENKINS_AGENT_WORKDIR
+          value: "/home/jenkins/agent"
+
